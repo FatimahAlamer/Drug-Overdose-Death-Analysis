@@ -24,12 +24,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## **Part Two** Exploring the dataset
 
-### Loading libraries 
+### Used  libraries 
+Packges   | Used for 
+--------  | --------
+Tidyverse | Collection of R packages designed for data science.
+Skimr     | provide summary statistics about variables.
+Naniar    | Identifying missing values 
 
--library("tidyverse") \
--library("skimr") \
--library("naniar") \
--library ("recipes") \
 ```{r Load libraries,  include=FALSE}
 
 library("tidyverse")
