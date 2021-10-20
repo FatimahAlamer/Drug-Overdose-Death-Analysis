@@ -1,5 +1,5 @@
 ---
-title: "drug_death_overdose_analysis"
+title: "Drug_Death_Overdose_Analysis"
 author: "Fatimah Alamer"
 date: "10/17/2021"
 output: html_document
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introduction
 ![opioid-overdose](opioid-overdose.jpg)  
 
- A drug overdose (overdose or OD) is the ingestion or application of a drug or other substance in quantities greater than are recommended. Typically it is used for cases when a risk to health will potentially result.An overdose may result in a toxic state or death.[2]According to the Centers for Disease Control(CDC),a total of 93,422 death from a drug overdose in the US last year.drug overdose is mainly due to Usage of illicit drugs,in large quantities.
+ A drug overdose (overdose or OD) is the ingestion or application of a drug or other substance in quantities greater than are recommended(1). Typically it is used for cases when a risk to health will potentially result.An overdose may result in a toxic state or death.According to the Centers for Disease Control(CDC),a total of 93,422 death from a drug overdose in the US last year.drug overdose is mainly due to Usage of illicit drugs,in large quantities.
  I am interested in analyzing this type of data and dressing several  questions:
   -what are the top 5 drug cause death?  
   -what is the country associated with more death  
@@ -29,8 +29,6 @@ knitr::opts_chunk$set(echo = TRUE)
 -library("tidyverse") \
 -library("skimr") \
 -library("naniar") \
--library("kknn") \
--library("VIM") \
 -library ("recipes") \
 ```{r Load libraries,  include=FALSE}
 
@@ -82,12 +80,7 @@ drug_death %>% skim() %>% filter(n_missing != 0) %>%
 #### Comments on missing values 
 Thinking of missing values for most two missed column is simply because there is no "other","other significance".so originally these data are not missing, simply they could be replaced with "no"  
 
-### Data cleaning 
-```{r}
-#imputation
-knn_imp <- drug_death %>%
- step_impute_knn(all_predictors(), neighbors = 5)
-```
+
 
 ### Making Tidy data
 ```{r}
@@ -125,7 +118,7 @@ drug_death %>% group_by(Sex) %>%
 #### 2sample test
 t.test(Heroin ~ Sex, data = drug_death)
 
-- According to national institute of drug abuse "Men are more likely than women to use almost all types of illicit drugs"
+- According to national institute of drug abuse "Men are more likely than women to use almost all types of illicit drugs"(3)
 ### what are the top 5 drug cause death?
 
 drug_death_long %>%
@@ -174,20 +167,18 @@ TukeyHSD(druganova1)
 
 
 
-### What are the most countery cauesed death related to drug name
+### What are the most country cauesed death related to drug name?
 
-### Death Location vs Drug Name
-drug_death_long %>%  select(DeathCity,values, Drug_name) %>% 
- 
-  group_by( DeathCity) %>%
+
  
 ## **Part Three** Conclusion and References 
 ### Conclusion
  Unfortunately, most of the medication is opioids, it is a sad story when starts just for joy and euphoria to addiction until death. 
-Generally, treatment will use a combination of behavioral therapy interventions and medications to reduce the person's need or desire for the drug and give the person the skills to refrain from future drug use, notes the National Institute on Drug Abuse.
+Generally, treatment will use a combination of behavioral therapy interventions and medications to reduce the person's need or desire for the drug and give the person the skills to refrain from future drug use, notes the National Institute on Drug Abuse(4).
 
 ### References
 
-
-_NIDA. "Sex and Gender Differences in Substance Use." National Institute on Drug Abuse, 13 Apr. 2021, https://www.drugabuse.gov/publications/research-reports/substance-use-in-women/sex-gender-differences-in-substance-use Accessed 16 Oct. 2021.
--https://healthfully.com/what-are-some-solutions-to-drug-abuse-4616383.html
+(1)Overdose - Florida Center for Recovery. (2021). Retrieved 20 October 2021, from https://www.floridacenterforrecovery.com/glossary/overdose/  
+(2)Drug Overdose Deaths | Drug Overdose | CDC Injury Center. (2021). Retrieved 20 October 2021, from https://www.cdc.gov/drugoverdose/deaths/index.html  
+(3)NIDA. "Sex and Gender Differences in Substance Use." National Institute on Drug Abuse, 13 Apr. 2021, https://www.drugabuse.gov/publications/research-reports/substance-usein-women/sex-gender-differences-in-substance-use Accessed 16 Oct. 2021.  
+(4)https://healthfully.com/what-are-some-solutions-to-drug-abuse-4616383.html  
